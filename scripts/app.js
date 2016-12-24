@@ -21,6 +21,12 @@ $(document).on("ready", function(){
     })
   })
 
+  $(window).scroll(function() {
+   if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+      console.log('dude, you scrolled to the bottom');
+   }
+});
+
 
 });
 
@@ -33,7 +39,7 @@ function giphyDefaultSuccess(json){
 }
 
 function giphyDefaultError(error){
-  console.log('error!  error is ', error);
+  console.log('error!  trending gifs error is ', error);
 }
 
 function giphySearchSuccess(json){
