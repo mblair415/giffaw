@@ -8,13 +8,13 @@ $(document).on("ready", function(){
     error: giphyDefaultError
   })
 
-  $('.btn').on('submit', function(event){
+  $('.btn').on('click', function(event){
     console.log('submit and ajax ... it is HAPPENING!!');
     event.preventDefault();
 
     $.ajax({
       method: 'GET',
-      url: ,
+      url: 'http://api.giphy.com/v1/gifs/search?q=&api_key=dc6zaTOxFJmzC',
       data: $('form').serialize(),
       success: giphySearchSuccess,
       error: giphySearchError
@@ -25,12 +25,12 @@ $(document).on("ready", function(){
 });
 
 function giphyDefaultSuccess(json){
-  console.log('giphySuccess and json is ', json);
+  // console.log('giphySuccess and json is ', json);
   json.data.forEach(function(gif){
     // $(".gif-gallery").append("<img src=" + data.images.fixed_width_small.url +
     // ">");
     $(".gif-gallery").append('<img src=' +gif.images.fixed_width.url+'>')
-    console.log('gif is ', gif);
+    // console.log('gif is ', gif);
   })
 }
 
@@ -39,7 +39,7 @@ function giphyDefaultError(error){
 }
 
 function giphySearchSuccess(json){
-
+  console.log('dat button was clicked and errythin is good ', json);
 }
 
 function giphySearchError(error){
