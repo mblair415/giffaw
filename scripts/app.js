@@ -23,7 +23,15 @@ $(document).on("ready", function(){
 
   $(window).scroll(function() {
    if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
-      console.log('dude, you scrolled to the bottom');
+     console.log('dude, you scrolled to the bottom');
+
+       $.ajax({
+         method: 'GET',
+         url: 'http://api.giphy.com/v1/gifs/search?q=gif-input&api_key=dc6zaTOxFJmzC&limit=10',
+         data: $('form').serialize(),
+         success: giphySearchMoreSuccess,
+         error: giphySearchError
+       })
    }
 });
 
@@ -53,4 +61,12 @@ function giphySearchSuccess(json){
 
 function giphySearchError(error){
   console.log('ajax search error!  none of this is good! ', error);
+}
+
+function giphySearchMoreSuccess(json){
+  console.log('you reached the bottom and the json search worked');
+  json.data.forEach(function(gif){
+    $(".gif-gallery").append('<img src=' +gif.images.fixed_width.url+'>')
+    // console.log('gif is ', gif);
+  })
 }
